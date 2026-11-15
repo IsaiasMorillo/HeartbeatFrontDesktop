@@ -20,6 +20,20 @@ public sealed class SimpleStatusTests
         return world;
     }
 
+    // ---- Perfil de entorno incompleto ----
+
+    [Fact]
+    public void A_mission_profile_with_no_crew_or_volume_does_not_break_the_screen()
+    {
+        // El servidor manda ceros cuando la misión no tiene el perfil definido: antes el login terminaba en «problema inesperado».
+        EnvironmentProfile empty = new("station", 0m, 0m, 0, 0m);
+
+        SimpleStatusViewModel simple = new([], [], [], empty);
+
+        HazardLightViewModel isolation = simple.Hazards.First(h => h.Hazard == Hazard.IsolationAndConfinement);
+        Assert.Null(isolation.Status);
+    }
+
     // ---- Semáforos ----
 
     [Fact]
