@@ -5,6 +5,12 @@ public static partial class Strings
 {
     private static void AddViews(Dictionary<string, (string En, string Es)> t)
     {
+        t["assistant.disclaimer"] = ("Claude explains Heartbeat data but does not diagnose or replace official emergency procedures.", "Claude explica los datos de Heartbeat, pero no diagnostica ni sustituye los procedimientos oficiales de emergencia.");
+        t["assistant.open"] = ("Open Claude assistant", "Abrir asistente Claude");
+        t["assistant.send"] = ("Send", "Enviar");
+        t["assistant.subtitle"] = ("Ask about your current Heartbeat status and active alerts.", "Pregunta por tu estado actual de Heartbeat y las alertas activas.");
+        t["assistant.thinking"] = ("Claude is reviewing the current data…", "Claude está revisando los datos actuales…");
+        t["assistant.title"] = ("Heartbeat assistant", "Asistente de Heartbeat");
         t["bar.syncNow"] = ("Sync now", "Sincronizar ahora");
         t["body.figure"] = ("Body figure", "Figura del cuerpo");
         t["body.intro"] = ("In microgravity the spine lengthens and the legs lose volume. Log your measurements in centimeters to see the change.", "En microgravedad la columna se alarga y las piernas pierden volumen. Registra tus medidas en centímetros para ver el cambio.");

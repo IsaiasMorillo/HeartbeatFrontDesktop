@@ -75,6 +75,12 @@ dotnet run --project src/Heartbeat.Desktop/Heartbeat.Desktop.csproj
 - **Modo demostración** (`Demo/`): mientras no estén los tickets reales hay un acceso de demostración (`ana`, `luis`, `mara` con contraseña `demo123`, sustituye #27), un historial de ejemplo sembrado en la base local la primera vez y una sincronización simulada (sustituye #32). Las pantallas solo conocen `IAuthenticator`, `IHealthRecordStore` e `ISyncStatusProvider`; el check-up se evalúa con el `HealthEvaluator` real de `Heartbeat.Shared`. El interruptor **Enlace con la Tierra** de la barra superior simula perder el enlace: apagado, los check-ups y mensajes quedan *Pendientes* y salen al volver a encenderlo.
 - **Barra de estado**: en línea / sin conexión, último sync y pendientes. Se alimenta de `IConnectivityService` e `ISyncStatusProvider`; el motor de sync (#32) sustituirá la implementación provisional.
 
+- **Asistente Claude** (`Assistant/`): el botón de chat del rail abre una ventana independiente que consulta
+  `POST /api/crew/v1/assistant/chat` con la sesión del astronauta. La API key de Anthropic vive exclusivamente en
+  `Heartbeat.Api`; nunca se almacena en el escritorio. El asistente explica el estado y las alertas que el backend ya
+  calculó, pero no evalúa mediciones ni sustituye los procedimientos de emergencia. Requiere `CrewApi:Mode = Live`;
+  si Claude o la red fallan, la evaluación local, las alertas y la sincronización siguen funcionando.
+
 - **Panel de información y fuentes** (`Info/`): por indicador explica por qué importa, cómo medir y riesgos, y lista las fuentes NASA / agencias con enlaces que abren en el navegador. El contenido sale de `reference-ranges.json` (copia embebida en `Heartbeat.Shared`) a través de `IIndicatorInfoProvider`, con lectura estricta: una fuente no definida o con URL que no sea http(s) hace fallar las pruebas en vez de mostrar una ficha incompleta. Se abre en una ventana aparte, no modal y única, con `IIndicatorInfoPresenter.Show(indicatorId)`; el dashboard ya lo usa, y **el formulario de check-up (#30) solo tiene que inyectar `IIndicatorInfoPresenter` y llamar a `Show("heartRate")` desde su botón de ayuda** (al ser otra ventana, no se pierde lo escrito en el formulario).
 
 ### Modo simple (HB-FE-01)

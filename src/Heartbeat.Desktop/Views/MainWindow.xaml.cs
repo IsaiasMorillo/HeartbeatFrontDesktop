@@ -3,6 +3,7 @@ using System.Windows.Automation;
 using System.Windows.Data;
 
 using Heartbeat.Desktop.Localization;
+using Heartbeat.Desktop.Assistant;
 
 using Heartbeat.Desktop.ViewModels;
 
@@ -41,6 +42,17 @@ public partial class MainWindow : Window
 
     private void Close_Click(object sender, RoutedEventArgs e) => Close();
 
+    private readonly IAssistantWindowPresenter? _assistantPresenter;
+
+    public MainWindow(
+        MainWindowViewModel viewModel,
+        IAssistantWindowPresenter assistantPresenter)
+        : this(viewModel)
+    {
+        _assistantPresenter = assistantPresenter;
+    }
+
+    private void Assistant_Click(object sender, RoutedEventArgs e) => _assistantPresenter?.Show(this);
     // Una ventana sin borde se desborda unos píxeles por cada lado al maximizarla: se compensa con un margen.
     private void OnStateChanged()
     {

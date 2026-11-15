@@ -60,6 +60,10 @@
 
                 <!-- Abajo: información de indicadores y cerrar sesión -->
                 <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,14" HorizontalAlignment="Center">
+                    <Button Content="&#xE8BD;" Style="{StaticResource RailButtonStyle}"
+                            Click="Assistant_Click"
+                            ToolTip="{loc:Loc assistant.open}"
+                            AutomationProperties.Name="{loc:Loc assistant.open}" />
                     <Button Content="&#xE946;" Style="{StaticResource RailButtonStyle}"
                             Command="{Binding ShowInfoCommand}"
                             ToolTip="{loc:Loc main.infoSources}"

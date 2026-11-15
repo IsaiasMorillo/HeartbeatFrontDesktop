@@ -1,4 +1,5 @@
 using Heartbeat.Desktop.Navigation;
+using Heartbeat.Desktop.Assistant;
 using Heartbeat.Desktop.ViewModels;
 using Heartbeat.Desktop.Views;
 
@@ -22,6 +23,7 @@ public sealed class DependencyInjectionTests
         });
 
         Assert.NotNull(provider.GetRequiredService<MainWindowViewModel>());
+        Assert.NotNull(provider.GetRequiredService<IAssistantWindowPresenter>());
     }
 
     [Theory]

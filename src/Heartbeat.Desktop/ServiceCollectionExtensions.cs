@@ -1,5 +1,6 @@
 using System.Net.Http;
 using Heartbeat.Client;
+using Heartbeat.Desktop.Assistant;
 using Heartbeat.Desktop.Data;
 using Heartbeat.Desktop.Demo;
 using Heartbeat.Desktop.Info;
@@ -62,6 +63,19 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ITokenProtector, DpapiTokenProtector>();
         services.AddSingleton<IDeviceIdProvider, FileDeviceIdProvider>();
         services.AddSingleton<IAuthService, AuthService>();
+
+        // Claude se consume exclusivamente a través de Heartbeat.Api; ninguna API key vive en el escritorio.
+        services.AddSingleton<IAssistantApiClient>(sp =>
+        {
+            CrewApiOptions options = sp.GetRequiredService<CrewApiOptions>();
+            return new AssistantApiClient(
+                new HttpClient { BaseAddress = new Uri(options.BaseUrl), Timeout = TimeSpan.FromSeconds(Math.Max(10, options.TimeoutSeconds)) },
+                sp.GetRequiredService<ICrewApiClient>(),
+                options);
+        });
+        services.AddTransient<AssistantViewModel>();
+        services.AddTransient<AssistantWindow>();
+        services.AddSingleton<IAssistantWindowPresenter, AssistantWindowPresenter>();
 
         // Rangos de referencia: los descargados en una sincronización anterior si son más nuevos, o los embebidos.
         services.AddSingleton(sp => RangesSource.Load(sp));

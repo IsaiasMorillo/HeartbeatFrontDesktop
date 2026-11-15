@@ -53,6 +53,15 @@ public static partial class Strings
         t["main.sessionOffline"] = ("Offline session", "Sesión sin conexión");
         t["main.restore"] = ("Restore", "Restaurar");
 
+        // Asistente Claude
+        t["assistant.welcome"] = ("I can explain your current Heartbeat status and active alerts in plain language. I cannot diagnose or replace emergency procedures.", "Puedo explicar tu estado actual de Heartbeat y las alertas activas con lenguaje sencillo. No puedo diagnosticar ni sustituir los procedimientos de emergencia.");
+        t["assistant.you"] = ("You", "Tú");
+        t["assistant.error.demo"] = ("The assistant needs a live connection to Heartbeat.Api. Change CrewApi:Mode to Live.", "El asistente necesita conexión real con Heartbeat.Api. Cambia CrewApi:Mode a Live.");
+        t["assistant.error.session"] = ("Your online session expired. Sign in again while connected.", "Tu sesión en línea venció. Inicia sesión de nuevo con conexión.");
+        t["assistant.error.disabled"] = ("The Claude assistant is not enabled or configured on the server.", "El asistente Claude no está habilitado o configurado en el servidor.");
+        t["assistant.error.network"] = ("Heartbeat.Api could not be reached. Alerts and offline evaluation still work.", "No se pudo contactar Heartbeat.Api. Las alertas y la evaluación sin conexión siguen funcionando.");
+        t["assistant.error.unavailable"] = ("Claude is temporarily unavailable. Try again later; the displayed Heartbeat status remains valid.", "Claude no está disponible temporalmente. Inténtalo más tarde; el estado mostrado por Heartbeat sigue siendo válido.");
+
         // Barra de estado
         t["bar.syncing"] = ("Syncing…", "Sincronizando…");
         t["bar.rejected.one"] = ("1 rejected", "1 rechazado");
