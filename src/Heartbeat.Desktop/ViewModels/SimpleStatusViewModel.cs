@@ -147,8 +147,10 @@ public sealed class SimpleStatusViewModel
             }
         }
 
+        // Un perfil de entorno incompleto (tripulación o volumen en 0, como lo manda el servidor si la misión no lo tiene
+        // definido) no permite calcular los índices: se deja sin datos en vez de romper la pantalla.
         IsolationConfinementIndices? isolation = null;
-        if (profile is not null)
+        if (profile is { CrewSize: > 0, HabitableVolumeM3: > 0 })
         {
             isolation = IsolationConfinement.Evaluate(profile);
             withData.Add(Hazard.IsolationAndConfinement);
